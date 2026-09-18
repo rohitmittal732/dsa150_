@@ -1,0 +1,28 @@
+class Solution {
+    public void moveZeroes(int[] nums) {
+        Queue<Integer> q=new LinkedList<>();
+         int i=0;
+         int count=0;
+         int idx=0;
+         if(nums.length==1) return;
+        while(i<nums.length){
+            q.add(nums[i]);
+            i++;
+        }
+        while(q.size()>0){
+            int top=q.remove();
+            if(top==0){
+                count++;
+            }else{
+               nums[idx]=top;
+               idx++;
+            }
+        }
+        int j=0;
+        while(j<count){
+            nums[idx]=0;
+            idx++;
+            j++;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        HashSet<Integer> set=new HashSet<>();
+        int n=nums.length;
+        int possible=1;
+        int i=0;
+        while(i<n){
+           set.add(nums[i]);
+           i++;
+        }
+        int j=0;
+      while(j<n){
+          if(set.contains(possible)){
+            possible+=1;
+           
+        }
+        j++;
+      }
+       return possible;
+    }
+}

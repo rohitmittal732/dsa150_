@@ -1,0 +1,68 @@
+class Solution {
+
+    public String findLine(int i, int j, int remainingSpace, int extraSpace, int maxWidth, String[] words) {
+
+        String line = "";
+
+        for (int k = i; k < j; k++) {
+            line += words[k];
+
+            if (k == j - 1) {
+                continue;
+            }
+
+            for (int m = 1; m <= remainingSpace; m++) {
+                line += " ";
+
+            }
+
+            if (extraSpace > 0) {
+                line += " ";
+                extraSpace--;
+            }
+
+        }
+
+        while (line.length() < maxWidth) {
+            line += " ";
+
+        }
+        return line;
+    }
+
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> list = new ArrayList<>();
+        int i = 0;
+        int n = words.length;
+        while (i < n) {
+
+            int lettersCount = words[i].length();
+            int slots = 0;
+
+            int j = i + 1;
+
+            while (j < n && lettersCount + slots + words[j].length() + 1 <= maxWidth) {
+                lettersCount += words[j].length();
+                slots += 1;
+                j++;
+            }
+
+            int remainingSlots = maxWidth - lettersCount;
+            int remainingSpace = slots == 0 ? 0 : remainingSlots / slots;
+            int extraSpace = slots == 0 ? 0 : remainingSlots % slots;
+
+            if (j == n) {
+                remainingSpace = 1;
+                extraSpace = 0;
+            }
+
+            String line = findLine(i, j, remainingSpace, extraSpace, maxWidth, words);
+
+            list.add(line);
+
+            i = j;
+
+        }
+        return list;
+    }
+}

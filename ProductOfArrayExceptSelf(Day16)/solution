@@ -1,0 +1,25 @@
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+
+       int mult=1;
+        int[] original=nums.clone();
+        for(int num:nums){
+            mult*=num;
+        }
+
+        for(int i=0;i<nums.length;i++){
+            if(original[i]==0){
+                int mpl=1;
+                for(int j=0;j<original.length;j++){
+                    if(i==j) continue;
+                    mpl*=original[j];
+                }
+                nums[i]=mpl;
+            }
+           else{
+             nums[i]=mult/original[i];
+           }
+        }
+        return nums;
+    }
+}
